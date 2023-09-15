@@ -1,4 +1,5 @@
 import { createStore } from "vuex";
+import router from "@/routes/router";
 
 const store = createStore({
     state:{
@@ -8,8 +9,11 @@ const store = createStore({
 
     },
     mutations:{
-
-    }
+        setLogin(state){
+            state.logged = true
+            router.push('/home')
+        }
+    },
 })
 
 export default store;

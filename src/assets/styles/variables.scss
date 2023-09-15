@@ -1,2 +1,31 @@
 // Variaveis globais
 
+@font-face {
+    font-family: 'GrandiFlora';
+    src: url('@/assets/fonts/Grandiflora_One/GrandifloraOne-Regular.ttf') format('truetype');
+}
+
+$bg-100: #f8eeec;
+$bg-200: #3d405c;
+$bg-300: #2d284d;
+
+$danger: #e74d3c;
+$attention: #f39c12;
+$safe: #28af60;
+
+$text-100: #dee7ed;
+$text-200: #243a5c;
+
+$shadow: rgba(0, 0, 0, 0.192);
+
+@mixin mobile {
+    @media screen and (max-width: 767px) {
+      @content; 
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 768px) {
+      @content; 
+    }
+}
