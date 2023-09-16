@@ -32,8 +32,12 @@ export default {
     updateThermometer(){
 
         let temperature = this.getReactorTemperature(0);
-
-        if (temperature <= 300){
+      
+        if(temperature <= 100){
+          return ['green-box']
+        }else if(temperature <= 200){
+          return ['green-box', 'green-box']
+        }else if (temperature <= 300){
           return ['green-box', 'green-box', 'green-box']
         }else if(temperature <= 400){
           return ['green-box', 'green-box', 'green-box', 'yellow-box']

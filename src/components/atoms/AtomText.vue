@@ -1,5 +1,5 @@
 <template>
-  <span class="text">{{ content }}</span>
+  <span :class="`text ${color}`">{{ content }}</span>
 </template>
 
 <script>
@@ -9,30 +9,6 @@ export default {
         color: String,
         content: String
     },
-
-    mounted(){
-        this.colorSelector()
-    },
-    
-    methods:{
-        colorSelector(){
-            switch (this.color){
-                case "dark":
-                    document.querySelector(".button").classList.add("dark")
-                    break
-                case "danger":
-                    document.querySelector(".button").classList.add("danger")
-                    break
-                case "safe":
-                    document.querySelector(".button").classList.add("safe")
-                    break
-                case "attention":
-                    document.querySelector(".button").classList.add("attention")
-                    break
-
-            }
-        }
-    }
 
 };
 </script>

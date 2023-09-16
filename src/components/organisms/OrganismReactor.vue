@@ -4,14 +4,19 @@
     
     <div class="info-box">
       
-      <div class="temperature-box">
+      <div class="box temperature">
         <AtomText content="Temperatura em Celsius:" class="subtitle" />
         <MoleculeThermometer />
       </div>
 
-      <div class="alert-box">
+      <div class="box alert">
         <AtomText content="Painel de alertas:" class="subtitle" />
         <MoleculeAlertBoxVue />
+      </div>
+
+      <div class="box control">
+        <AtomText content="Controles:" class="subtitle" />
+        <MoleculeControlBox />
       </div>
 
     </div>
@@ -23,12 +28,14 @@
 import MoleculeThermometer from '../molecules/MoleculeThermometer.vue';
 import AtomText from '../atoms/AtomText.vue';
 import MoleculeAlertBoxVue from '../molecules/MoleculeAlertBox.vue';
+import MoleculeControlBox from '../molecules/MoleculeControlBox.vue';
 
 export default {
   components:{
     MoleculeThermometer,
     AtomText,
-    MoleculeAlertBoxVue
+    MoleculeAlertBoxVue,
+    MoleculeControlBox
   }
 }
 </script>
@@ -54,8 +61,11 @@ export default {
 .info-box
     display: flex
     column-gap: 3vh
+    max-width: 49vh
+    flex-wrap: wrap
+    row-gap: 2vh 
 
-.temperature-box
+.box
     display: flex
     flex-direction: column
     align-items: center
@@ -63,13 +73,9 @@ export default {
     background-color: $bg-200
     border-radius: 2px
     padding: 1vh  
+    min-width: fit-content
 
-.alert-box
-    display: flex
-    flex-direction: column
-    border-radius: 2px
-    background-color: $bg-200
-    padding: 1vh  
-    row-gap: 1vh
+.control
+    min-width: 47vh
 
 </style>

@@ -1,15 +1,15 @@
 <template>
   <div class="dash-body">
-    <OrganismReactorTemperature />
+    <OrganismReactor />
   </div>
 </template>
 
 <script>
-import OrganismReactorTemperature from './OrganismReactorTemperature.vue';
+import OrganismReactor from './OrganismReactor.vue';
 
 export default {
   components:{
-    OrganismReactorTemperature
+    OrganismReactor
   }
 }
 </script>

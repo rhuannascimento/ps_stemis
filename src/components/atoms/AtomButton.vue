@@ -48,4 +48,8 @@ export default {
     background-color: $attention !important
     color: $text-100 !important
 
+.light
+    background-color: $bg-100 !important
+    color: $text-200 !important
+
 </style>
