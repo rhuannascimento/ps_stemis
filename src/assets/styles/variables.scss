@@ -30,9 +30,14 @@ $shadow: rgba(0, 0, 0, 0.192);
     }
 }
 
-@keyframes pulse {
+@keyframes attention-pulse {
   0% { color: $attention; }
   50% { color: $text-200; }
   100% { color: $attention; }
 }
 
+@keyframes danger-pulse {
+  0% { color: $danger; }
+  50% { color: $text-200; }
+  100% { color: $danger; }
+}

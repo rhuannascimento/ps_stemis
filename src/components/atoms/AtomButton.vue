@@ -1,5 +1,5 @@
 <template>
-  <button class="button">{{ value }}</button>
+  <button :class="`button ${bg}`">{{ value }}</button>
 </template>
 
 <script>
@@ -9,30 +9,6 @@ export default {
         value: String,
         bg: String
     },
-
-    mounted(){
-        this.bgSelector()
-    },
-    
-    methods:{
-        bgSelector(){
-            switch (this.bg){
-                case "dark":
-                    document.querySelector(".button").classList.add("dark")
-                    break
-                case "danger":
-                    document.querySelector(".button").classList.add("danger")
-                    break
-                case "safe":
-                    document.querySelector(".button").classList.add("safe")
-                    break
-                case "attention":
-                    document.querySelector(".button").classList.add("attention")
-                    break
-
-            }
-        }
-    }
 
 }
 </script>

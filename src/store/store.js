@@ -8,7 +8,7 @@ const store = createStore({
             {
                 id: 1,
                 temperature: 300,
-                fire: true,
+                fire: false,
                 stopWarming: false,
                 outFire: false
             }
@@ -27,15 +27,24 @@ const store = createStore({
             state.logged = true
             router.push('/home')
         },
-        setUpReactorTemperature(state){    
-            state.reactor[0].temperature += 50
+        setUpReactorTemperature(state, payload){    
+            state.reactor[payload].temperature += 50
+
+            if(this.state.reactor[payload].fire){
+                this.state.reactor[payload].temperature += 100
+            }
+
         }
     },
     actions: {
         startWarmin({ commit }, payload) {
             let intervalId = setInterval(() => {
-                commit('setUpReactorTemperature');
-                
+                commit('setUpReactorTemperature', payload);
+
+                if(this.state.reactor[payload].temperature == 600){
+                    this.state.reactor[payload].fire = true
+                }
+
                 if(this.state.reactor[payload].temperature == 750){
                     clearInterval(intervalId)
                 }
