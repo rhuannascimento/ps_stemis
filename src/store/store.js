@@ -8,48 +8,40 @@ const store = createStore({
             {
                 id: 1,
                 temperature: 300,
-                flame: true,
+                fire: true,
                 stopWarming: false,
                 outFire: false
             }
         ]
     },
     getters:{
-        getReactorTemperature(state){
-            return state.reactor
-        }
+        getReactorTemperature: (state) => (id) => {
+            return state.reactor[id].temperature
+        },
+        getReactorFire: (state) => (id) => {
+            return state.reactor[id].fire
+        },
     },
     mutations:{
         setLogin(state){
             state.logged = true
             router.push('/home')
         },
-        setUpReactorTemperature(state, payload){
-
-            let timeoutId = setTimeout(function() {
-                state.reactor[payload].temperature += 50
-                if(state.reactor[payload].temperature == 600){
-                    state.reactor[payload].flame = true
-                }
-
-                if(state.reactor[payload].temperature == 700 ){
-                    clearTimeout(timeoutId)
-                }
-
-            }, 10000)
-
-           /* while(state.reactor[payload.reactor].temperature <= 700 && payload.amount > 0){
-                state.reactor[payload.reactor].temperature += 100;
-                payload.amount -= 1;
-                
-                if(state.reactor[payload.reactor].temperature == 600){
-                    state.reactor[payload.reactor].flame = true;
-                }
-
-            }*/
-
-
+        setUpReactorTemperature(state){    
+            state.reactor[0].temperature += 50
         }
+    },
+    actions: {
+        startWarmin({ commit }, payload) {
+            let intervalId = setInterval(() => {
+                commit('setUpReactorTemperature');
+                
+                if(this.state.reactor[payload].temperature == 750){
+                    clearInterval(intervalId)
+                }
+
+            }, 2000); 
+        },
     },
 })
 

@@ -29,3 +29,10 @@ $shadow: rgba(0, 0, 0, 0.192);
       @content; 
     }
 }
+
+@keyframes pulse {
+  0% { color: $attention; }
+  50% { color: $text-200; }
+  100% { color: $attention; }
+}
+

@@ -2,7 +2,7 @@
   <div class="header-body">
     <AtomText class="text" content="Opções de simulação:"/>
     <div class="button-box">
-        <AtomButton bg="attention" value="Gerar aumento de temperatura"/>
+        <AtomButton bg="attention" value="Gerar aumento de temperatura" @click="upReactorTemperature()"/>
     </div>
   </div>
 </template>
@@ -10,11 +10,22 @@
 <script>
 import AtomButton from '../atoms/AtomButton.vue';
 import AtomText from '../atoms/AtomText.vue';
+
 export default {
     components:{
         AtomButton,
         AtomText
-    }
+    },
+
+    methods:{
+    
+        upReactorTemperature(){
+            this.$store.dispatch('startWarmin', 0);  
+        }
+
+    },
+    
+
 }
 </script>
 

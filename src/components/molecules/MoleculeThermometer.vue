@@ -1,7 +1,9 @@
 <template>
   <div class="thermometer-body">
     <div class="display">
-      
+      <div v-for="classe in updateThermometer" :key="classe" :class="classe">
+
+      </div>
     </div>
     <div class="temperature">
       <ul class="temperature-list">
@@ -19,12 +21,33 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
+import { mapGetters} from 'vuex';
 
 export default {
 
+
   computed:{
-    ...mapGetters(['getReactorTemperature'])
+    ...mapGetters(['getReactorTemperature']),
+
+    updateThermometer(){
+
+        let temperature = this.getReactorTemperature(0);
+
+        if (temperature <= 300){
+          return ['green-box', 'green-box', 'green-box']
+        }else if(temperature <= 400){
+          return ['green-box', 'green-box', 'green-box', 'yellow-box']
+        }else if(temperature <= 500){
+          return ['green-box', 'green-box', 'green-box', 'yellow-box', 'yellow-box']
+        }else if(temperature <= 600){
+          return ['green-box', 'green-box', 'green-box', 'yellow-box', 'yellow-box', 'red-box']
+        }else if(temperature <= 700){
+          return ['green-box', 'green-box', 'green-box', 'yellow-box', 'yellow-box', 'red-box', 'red-box']
+        }else{
+          return ['green-box', 'green-box', 'green-box', 'yellow-box', 'yellow-box', 'red-box', 'red-box', 'red-box']
+        }
+
+    }
   }
 
 };
