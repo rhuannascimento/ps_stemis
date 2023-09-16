@@ -33,7 +33,9 @@ export default {
 
         let temperature = this.getReactorTemperature(0);
       
-        if(temperature <= 100){
+        if(temperature == 0){
+          return []
+        }else if(temperature <= 100){
           return ['green-box']
         }else if(temperature <= 200){
           return ['green-box', 'green-box']

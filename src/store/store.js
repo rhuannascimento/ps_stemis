@@ -7,10 +7,12 @@ const store = createStore({
         reactor: [
             {
                 id: 1,
-                temperature: 300,
+                on: false,
+                temperature: 0,
                 fire: false,
                 stop_warming: false,
-                water_flux: false
+                water_flux: false,
+                fire_break: false
             }
         ]
     },
@@ -23,6 +25,9 @@ const store = createStore({
         },
         getWaterFlux: (state) => (id) => {
             return state.reactor[id].water_flux
+        },
+        getPowerOnOff: (state) => (id) => {
+            return state.reactor[id].on
         },
     },
     mutations:{
@@ -40,8 +45,10 @@ const store = createStore({
 
         },
 
-        setDownReactorTemperature(state, payload){    
-            state.reactor[payload].temperature -= 100
+        setDownReactorTemperature(state, payload){
+            if(state.reactor[payload].temperature > 0){    
+                state.reactor[payload].temperature -= 100
+            }
         },
 
         setWaterFlux(state, payload){
@@ -49,22 +56,34 @@ const store = createStore({
         },
 
         setOperationalTemperature(state, payload){
+            if(state.reactor[0].on){
+                state.reactor[payload].temperature += 1  
+            }   
             
-            state.reactor[payload].temperature += 1
-            
+        },
+
+        setFireOut(state, payload){
+            state.reactor[payload].fire_break = true
+            state.reactor[payload].fire = false
+        },
+
+        setOnOffReactor(state, payload){
+            state.reactor[payload].on = !state.reactor[payload].on
         }
 
     },
     actions: {
         startWarmin({ commit }, payload) {
+            this.state.reactor[payload].stop_warming = false
+            this.state.reactor[payload].fire_break = false
             let intervalId = setInterval(() => {
-                commit('setUpReactorTemperature', payload);
+                commit('setUpReactorTemperature', payload)
 
-                if(this.state.reactor[payload].temperature == 600){
+                if(this.state.reactor[payload].temperature == 600 && !this.state.reactor[payload].fire_break){
                     this.state.reactor[payload].fire = true
                 }
 
-                if(this.state.reactor[payload].temperature == 750 || this.state.reactor[payload].stop_warming){
+                if(this.state.reactor[payload].stop_warming){
                     clearInterval(intervalId)
                 }
 
@@ -73,7 +92,7 @@ const store = createStore({
 
         startCool({ commit }, payload) {
             let intervalId = setInterval(() => {
-                commit('setDownReactorTemperature', payload);
+                commit('setDownReactorTemperature', payload)
 
                 if(this.state.reactor[payload].temperature <= 300){
                     this.state.reactor[payload].stop_warming = true;
@@ -89,13 +108,44 @@ const store = createStore({
         stratNaturalWarming({ commit }, payload) {
             let intervalId = setInterval(() => {
                 if(this.state.reactor[payload].water_flux == false && this.state.reactor[payload].temperature < 300){
-                    commit('setOperationalTemperature', payload);
+                    commit('setOperationalTemperature', payload)
                 }else{
                     clearInterval(intervalId)
                 }
 
             }, 10); 
         },
+
+        powerOnOffReactor({ commit }, payload) {
+
+            commit('setOnOffReactor', payload);
+
+            if(this.state.reactor[0].on){
+
+                let intervalId = setInterval(() => {
+                    if(this.state.reactor[payload].water_flux == false && this.state.reactor[payload].temperature < 300){
+                        commit('setOperationalTemperature', payload)
+                    }else{
+                        clearInterval(intervalId)
+                    }
+
+                }, 10); 
+
+            }else{
+
+                this.state.reactor[payload] = {
+                    id: 1,
+                    on: false,
+                    temperature: 0,
+                    fire: false,
+                    stop_warming: false,
+                    water_flux: false,
+                    fire_break: false
+                }
+
+            }
+        },
+
     },
 })
 

@@ -17,7 +17,8 @@ export default {
 <style lang="sass" scoped>
 
 .dash-body
-    height: 500vh
+    display: flex
+    justify-content: center
     
 
 </style>

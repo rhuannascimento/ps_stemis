@@ -14,6 +14,11 @@
         <MoleculeAlertBoxVue />
       </div>
 
+      <div class="box energy">
+        <AtomText content="Energia:" class="subtitle" />
+        <MoleculeEnergyBoxVue />
+      </div>
+
       <div class="box control">
         <AtomText content="Controles:" class="subtitle" />
         <MoleculeControlBox />
@@ -29,13 +34,15 @@ import MoleculeThermometer from '../molecules/MoleculeThermometer.vue';
 import AtomText from '../atoms/AtomText.vue';
 import MoleculeAlertBoxVue from '../molecules/MoleculeAlertBox.vue';
 import MoleculeControlBox from '../molecules/MoleculeControlBox.vue';
+import MoleculeEnergyBoxVue from '../molecules/MoleculeEnergyBox.vue';
 
 export default {
   components:{
     MoleculeThermometer,
     AtomText,
     MoleculeAlertBoxVue,
-    MoleculeControlBox
+    MoleculeControlBox,
+    MoleculeEnergyBoxVue
   }
 }
 </script>
@@ -44,7 +51,8 @@ export default {
 .reactor-body
     background-color: $bg-300
     padding: 2vh
-    width: fit-content 
+    width: fit-content
+    max-width: 98% 
     display: flex
     flex-direction: column
     align-items: center
@@ -60,10 +68,12 @@ export default {
 
 .info-box
     display: flex
-    column-gap: 3vh
-    max-width: 49vh
+    justify-content: center
+    column-gap: 2vh
+    max-width: fit-content
     flex-wrap: wrap
     row-gap: 2vh 
+    max-width: 100% 
 
 .box
     display: flex
@@ -73,9 +83,13 @@ export default {
     background-color: $bg-200
     border-radius: 2px
     padding: 1vh  
-    min-width: fit-content
+    width: 45%
+    @include mobile
+      width: 40%
 
+.energy
+    width: 100%
 .control
-    min-width: 47vh
+    width: 100%
 
 </style>

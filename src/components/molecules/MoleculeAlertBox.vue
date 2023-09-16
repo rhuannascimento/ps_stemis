@@ -77,6 +77,8 @@ export default {
     justify-content: center
     flex-wrap: wrap
     column-gap: 1vh
+    row-gap: 1vh
+    max-width: 12vh
     
 
 .icon
