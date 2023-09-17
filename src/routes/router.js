@@ -8,12 +8,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
-      path: "/",
+      path: '/',
+      redirect: { name: 'login' }
+    },
+    {
+      path: "/usina-nuclear/",
       name: "login",
       component: login,
     },
     {
-      path: "/home",
+      path: "/usina-nuclear/home",
       name: "home",
       meta: { requiresAuth: true },
       component: home,
