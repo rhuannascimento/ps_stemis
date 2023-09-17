@@ -103,7 +103,7 @@ const store = createStore({
                     this.state.reactor[payload].fire = true
                 }
 
-                if(this.state.reactor[payload].temperature >= 600){
+                if(this.state.reactor[payload].temperature >= 700){
                     commit('setUpRadiation', payload)
                 }
 

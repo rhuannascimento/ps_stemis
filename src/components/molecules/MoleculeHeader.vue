@@ -1,10 +1,12 @@
 <template>
   <div class="header-body">
+    <AtomButton class="instruction-button" bg="light" value="Intruções" @click="this.$emit('show-instructions')"/>
     <AtomText class="text" content="Opções de simulação:"/>
     <div class="button-box">
         <AtomButton bg="attention" value="Gerar aumento de temperatura" @click="upReactorTemperature()"/>
         <AtomButton bg="attention" value="Gerar aumento de radiação" @click="upReactorRadiation()"/>
     </div>
+    
   </div>
 </template>
 
@@ -54,5 +56,7 @@ export default {
 .button-box
     display: flex
     column-gap: 1vh
+
+
 
 </style>

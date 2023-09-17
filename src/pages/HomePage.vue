@@ -1,6 +1,7 @@
 <template>
   <div class="home-body">
-    <MoleculeHeader/>
+    <OrganismInstructions v-if="instructions" @close-instructions="instructions=false" />
+    <MoleculeHeader @show-instructions="instructions=true"/>
     <div class="home-box">
       <OrganismDashboard/>
     </div>
@@ -10,11 +11,19 @@
 <script>
 import MoleculeHeader from '@/components/molecules/MoleculeHeader.vue';
 import OrganismDashboard from '@/components/organisms/OrganismDashboard.vue';
+import OrganismInstructions from '@/components/organisms/OrganismInstructions.vue';
 
 export default {
   components:{
     MoleculeHeader,
-    OrganismDashboard
+    OrganismDashboard,
+    OrganismInstructions
+  },
+
+  data(){
+    return{
+      instructions: true
+    }
   }
 }
 </script>

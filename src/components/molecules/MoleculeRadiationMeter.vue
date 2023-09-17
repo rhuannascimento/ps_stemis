@@ -9,10 +9,10 @@
     </div>
     <div class="radiation">
       <ul class="radiation-list">
-        <li>40msv</li>
-        <li>30msv</li>
-        <li>20msv</li>
-        <li>10msv</li>
+        <li>40mSv</li>
+        <li>30mSv</li>
+        <li>20mSv</li>
+        <li>10mSv</li>
         <li>0mSv</li>
       </ul>
     </div>
