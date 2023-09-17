@@ -1,9 +1,10 @@
-// .github/workflows/deploy.yaml
 name: deploy
+
 on:
   push:
     branches:
       - master
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -11,12 +12,12 @@ jobs:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "12"
       - name: setup git auth
         env:
-          email: 'rhuan2414@gmail.com'
-          username: 'rhuannascimento'
-          access_token: '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'
+          email: "rhuan2414@gmail.com"
+          username: "rhuannascimento"
+          access_token: "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"
         run: |
           git config --global credential.helper store
           echo "https://${access_token}:x-oauth-basic@github.com" > ~/.git-credentials
