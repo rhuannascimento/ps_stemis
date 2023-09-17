@@ -17,7 +17,7 @@ const router = createRouter({
       component: login,
     },
     {
-      path: "/ps_stemis/home",
+      path: "/home",
       name: "home",
       meta: { requiresAuth: true },
       component: home,
