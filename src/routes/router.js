@@ -12,12 +12,12 @@ const router = createRouter({
       redirect: { name: 'login' }
     },
     {
-      path: "/usina-nuclear/",
+      path: "/ps_stemis/",
       name: "login",
       component: login,
     },
     {
-      path: "/usina-nuclear/home",
+      path: "/ps_stemis/home",
       name: "home",
       meta: { requiresAuth: true },
       component: home,
