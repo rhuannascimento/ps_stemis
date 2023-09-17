@@ -9,6 +9,7 @@ const store = createStore({
                 id: 1,
                 on: false,
                 temperature: 0,
+                radiation: 0,
                 fire: false,
                 stop_warming: false,
                 water_flux: false,
@@ -29,6 +30,9 @@ const store = createStore({
         getPowerOnOff: (state) => (id) => {
             return state.reactor[id].on
         },
+        getRadiaction: (state) => (id) =>{
+            return state.reactor[id].radiation
+        }
     },
     mutations:{
         setLogin(state){
@@ -46,8 +50,13 @@ const store = createStore({
         },
 
         setDownReactorTemperature(state, payload){
-            if(state.reactor[payload].temperature > 0){    
-                state.reactor[payload].temperature -= 100
+
+            if(state.reactor[payload].temperature > 0){  
+                if(state.reactor[payload].temperature == 50){
+                    state.reactor[payload].temperature -= 50
+                }else{
+                    state.reactor[payload].temperature -= 100
+                }
             }
         },
 
@@ -69,21 +78,36 @@ const store = createStore({
 
         setOnOffReactor(state, payload){
             state.reactor[payload].on = !state.reactor[payload].on
-        }
+        },
+
+        setUpRadiation(state, payload){
+            state.reactor[payload].radiation += 10
+        },
+
+        setDownRadiation(state, payload){
+            if(this.state.reactor[payload].radiation > 0){
+                state.reactor[payload].radiation -= 10
+            }
+        },
 
     },
     actions: {
         startWarmin({ commit }, payload) {
             this.state.reactor[payload].stop_warming = false
             this.state.reactor[payload].fire_break = false
+            this.state.reactor[payload].on = true
             let intervalId = setInterval(() => {
                 commit('setUpReactorTemperature', payload)
 
-                if(this.state.reactor[payload].temperature == 600 && !this.state.reactor[payload].fire_break){
+                if(this.state.reactor[payload].temperature >= 600 && !this.state.reactor[payload].fire_break){
                     this.state.reactor[payload].fire = true
                 }
 
-                if(this.state.reactor[payload].stop_warming){
+                if(this.state.reactor[payload].temperature >= 600){
+                    commit('setUpRadiation', payload)
+                }
+
+                if(this.state.reactor[payload].stop_warming || !this.state.reactor[payload].on){
                     clearInterval(intervalId)
                 }
 
@@ -116,35 +140,56 @@ const store = createStore({
             }, 10); 
         },
 
-        powerOnOffReactor({ commit }, payload) {
+        powerOnOffReactor({ commit, dispatch }, payload) {
 
             commit('setOnOffReactor', payload);
 
             if(this.state.reactor[0].on){
 
-                let intervalId = setInterval(() => {
-                    if(this.state.reactor[payload].water_flux == false && this.state.reactor[payload].temperature < 300){
-                        commit('setOperationalTemperature', payload)
-                    }else{
-                        clearInterval(intervalId)
-                    }
-
-                }, 10); 
+                dispatch('stratNaturalWarming', payload);
 
             }else{
-
+/*
                 this.state.reactor[payload] = {
                     id: 1,
                     on: false,
-                    temperature: 0,
+                    temperature: this.state.reactor[payload].temperature,
+                    radiation: this.state.reactor[payload].radiation,
                     fire: false,
                     stop_warming: false,
                     water_flux: false,
                     fire_break: false
-                }
+                }*/
+
+                let IntervaId2 = setInterval(() => {
+
+                    commit('setDownRadiation', payload)
+                    commit('setDownReactorTemperature', payload)
+
+                    if(this.state.reactor[payload].radiation <= 0 && this.state.reactor[payload].temperature <= 0){
+                        clearInterval(IntervaId2)
+                    }
+    
+                }, 1000)
 
             }
         },
+
+        startRadiation({commit, dispatch}, payload){
+            this.state.reactor[payload].on = true
+            dispatch('stratNaturalWarming', payload);
+            let intervalId = setInterval(() => {
+
+                commit('setUpRadiation', payload)
+
+                if(this.state.reactor[payload].on == false){
+                    clearInterval(intervalId)
+                }
+
+            }, 2000)
+        },
+
+        
 
     },
 })

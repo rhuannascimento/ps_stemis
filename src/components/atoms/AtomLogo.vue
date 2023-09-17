@@ -1,5 +1,5 @@
 <template>
-  <span class="logo" >pnc</span>
+  <span class="logo" >pdc</span>
 </template>
 
 <script>

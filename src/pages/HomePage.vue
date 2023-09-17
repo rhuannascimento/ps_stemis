@@ -25,6 +25,8 @@ export default {
     background-color: $bg-100
     width: 100%
     height: 100vh
+    @include mobile
+      height: fit-content
     
 .home-box
   padding: 5vh

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <AtomText :content="`${getReactorTemperature(0) * 10000} KwH`" />
+    <AtomText :content="getReactorTemperature(0) * 10000 < 0 ? '0 KwH' : `${getReactorTemperature(0) * 10000} KwH`" />
   </div>
 </template>
 
@@ -20,6 +20,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sass" scoped>
 
 </style>

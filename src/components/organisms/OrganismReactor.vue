@@ -4,9 +4,15 @@
     
     <div class="info-box">
       
-      <div class="box temperature">
-        <AtomText content="Temperatura em Celsius:" class="subtitle" />
-        <MoleculeThermometer />
+      <div class="box meter">
+        <div class="box">
+          <AtomText content="Medidor de Temperatura:" class="subtitle" />
+          <MoleculeThermometer />
+        </div>
+        <div class="box">
+          <AtomText content="Medidor de Radiação:" class="subtitle" />
+          <MoleculeRadiationMeter />
+        </div>
       </div>
 
       <div class="box alert">
@@ -35,6 +41,7 @@ import AtomText from '../atoms/AtomText.vue';
 import MoleculeAlertBoxVue from '../molecules/MoleculeAlertBox.vue';
 import MoleculeControlBox from '../molecules/MoleculeControlBox.vue';
 import MoleculeEnergyBoxVue from '../molecules/MoleculeEnergyBox.vue';
+import MoleculeRadiationMeter from '../molecules/MoleculeRadiationMeter.vue';
 
 export default {
   components:{
@@ -42,7 +49,8 @@ export default {
     AtomText,
     MoleculeAlertBoxVue,
     MoleculeControlBox,
-    MoleculeEnergyBoxVue
+    MoleculeEnergyBoxVue,
+    MoleculeRadiationMeter
   }
 }
 </script>
@@ -51,13 +59,15 @@ export default {
 .reactor-body
     background-color: $bg-300
     padding: 2vh
-    width: fit-content
+    width: 50%
     max-width: 98% 
     display: flex
     flex-direction: column
     align-items: center
     row-gap: 1vh 
     border-radius: 2px
+    @include mobile
+      width: fit-content
 
 .title
     font-weight: 600
@@ -70,7 +80,6 @@ export default {
     display: flex
     justify-content: center
     column-gap: 2vh
-    max-width: fit-content
     flex-wrap: wrap
     row-gap: 2vh 
     max-width: 100% 
@@ -87,9 +96,21 @@ export default {
     @include mobile
       width: 40%
 
+.meter
+    display: flex
+    flex-direction: row
+    text-align: center
+    align-items: flex-end
+    @include mobile
+      width: 100%
+
 .energy
-    width: 100%
+    justify-content: center
+    @include mobile
+      width: 40%
+
 .control
-    width: 100%
+    @include mobile
+      width: 100%
 
 </style>

@@ -3,6 +3,7 @@
     <AtomText class="text" content="Opções de simulação:"/>
     <div class="button-box">
         <AtomButton bg="attention" value="Gerar aumento de temperatura" @click="upReactorTemperature()"/>
+        <AtomButton bg="attention" value="Gerar aumento de radiação" @click="upReactorRadiation()"/>
     </div>
   </div>
 </template>
@@ -21,6 +22,9 @@ export default {
     
         upReactorTemperature(){
             this.$store.dispatch('startWarmin', 0);  
+        },
+        upReactorRadiation(){
+            this.$store.dispatch('startRadiation', 0); 
         }
 
     },
@@ -32,11 +36,13 @@ export default {
 <style lang="sass" scoped>
 .header-body
     max-width: 100%
-    height: 10vh
+    min-height: 10vh
+    height: fit-content
     background-color: $bg-300
     display: flex
     flex-direction: column
     justify-content: center
+    align-items: center
     row-gap: 1vh
     padding: 2vh
     position: sticky
@@ -47,6 +53,6 @@ export default {
 
 .button-box
     display: flex
-    max-width: 50%
+    column-gap: 1vh
 
 </style>
