@@ -4,6 +4,7 @@
     <AtomLogo />
 
     <div class="input-box">
+      <AtomText class="text" content="Usuário e senha = admin" color="dark"/>
       <AtomInput placeholder="Usuário" type="text" />
       <AtomInput placeholder="Senha" type="password"/>
       <span class="login-alert"></span>
@@ -18,6 +19,7 @@
 import AtomInput from '../atoms/AtomInput.vue';
 import AtomLogo from '../atoms/AtomLogo.vue';
 import AtomButton from '../atoms/AtomButton.vue';
+import AtomText from '../atoms/AtomText.vue';
 
 import { mapMutations } from 'vuex';
 
@@ -25,7 +27,8 @@ export default {
     components:{
         AtomInput,
         AtomLogo,
-        AtomButton
+        AtomButton,
+        AtomText
     },
 
     methods:{
@@ -72,6 +75,9 @@ export default {
     color: $danger   
     font-size: 12pt
     font-family: GrandiFlora
+    font-weight: 600
+
+.text
     font-weight: 600
 
 </style>

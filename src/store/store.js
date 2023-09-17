@@ -3,7 +3,7 @@ import router from "@/routes/router";
 
 const store = createStore({
     state:{
-        logged: true,
+        logged: false,
         reactor: [
             {
                 id: 1,
