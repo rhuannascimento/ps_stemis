@@ -1,5 +1,7 @@
 # Desafio Stemis
 
+Com este projeto consegui a vaga para desenvolvedor front-end na Stemis (https://stemis.com.br)
+
 Projeto final: https://rhuannascimento.github.io/usina-nuclear/
 
 
